@@ -1,0 +1,13 @@
+## in terminal
+## create environment
+conda create --name python2 python=2.7 R
+## install packages
+conda activate python2
+conda install -c conda-forge python-igraph
+##choose the location of the model
+cd desktop
+cd ADR-graph-0.1
+## enter the python software
+Python
+##download the prediction model
+##available at https://github.com/KHP-Informatics/ADR-graph.
