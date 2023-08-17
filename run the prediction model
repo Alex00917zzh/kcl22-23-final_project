@@ -1,0 +1,39 @@
+## in terminal
+##run the model
+##result using UMLS as input
+import EdgePrediction
+ep = EdgePrediction.EdgePrediction()
+ep.CSV_to_graph(fname = 'data/data_1.csv', header = True, srcNameCol = 0, srcTypeCol = 1, tgtNameCol = 4,tgtTypeCol = 3, edgeTypeCol = 2)
+ep.preprocess()
+ep.to_predict = 'TREAT'
+ep.network_order = ['TREAT', 'DRUG_TARGETS']
+ep.require_all_predictors = False
+result = ep.predict(target=’C1263846’, calculate_auc=True)
+result
+
+
+##result using uniprot ID as input
+import EdgePrediction
+ep = EdgePrediction.EdgePrediction()
+ep.CSV_to_graph(fname = 'data/data_2.csv', header = True, srcNameCol = 0, srcTypeCol = 1, tgtNameCol = 4,tgtTypeCol = 3, edgeTypeCol = 2)
+
+ep.preprocess()
+ep.to_predict = 'DRUG_TARGETS'
+ep.network_order = ['TREAT', 'DRUG_TARGETS']
+ep.require_all_predictors = False
+result = ep.predict(target= 'P34972', calculate_auc=True)
+result
+
+##result of historical validation
+import EdgePrediction
+ep = EdgePrediction.EdgePrediction()
+ep.CSV_to_graph(fname = 'data/data_16.csv', header = True, srcNameCol = 0, srcTypeCol = 1, tgtNameCol = 4,tgtTypeCol = 3, edgeTypeCol = 2)
+
+ep.preprocess()
+ep.to_predict = 'DRUG_TARGETS'
+ep.network_order = ['TREAT', 'DRUG_TARGETS']
+ep.require_all_predictors = False
+result = ep.predict(target= 'P34972', calculate_auc=True)
+result
+
+
