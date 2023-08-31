@@ -1,38 +1,58 @@
 ## in terminal
 ##run the model
 ##result using UMLS as input
+##Import the library:
 import EdgePrediction
+##Create an instance:
 ep = EdgePrediction.EdgePrediction()
+##Load data from data_after_process
 ep.CSV_to_graph(fname = 'data/data_1.csv', header = True, srcNameCol = 0, srcTypeCol = 1, tgtNameCol = 4,tgtTypeCol = 3, edgeTypeCol = 2)
+##pre-process the data ready for prediction:
 ep.preprocess()
+##we want to predict edges from drugs to TREAT(disease)
 ep.to_predict = 'TREAT'
+##specify the order
 ep.network_order = ['TREAT', 'DRUG_TARGETS']
+##run prediction
 ep.require_all_predictors = False
+##we will predict 'TREAT' edges from all drug nodes to C1263846 ADHD
 result = ep.predict(target=’C1263846’, calculate_auc=True)
 result
 
 
 ##result using uniprot ID as input
+##Import the library:
 import EdgePrediction
+##Create an instance:
 ep = EdgePrediction.EdgePrediction()
+##Load data from data_after_process
 ep.CSV_to_graph(fname = 'data/data_2.csv', header = True, srcNameCol = 0, srcTypeCol = 1, tgtNameCol = 4,tgtTypeCol = 3, edgeTypeCol = 2)
-
+##pre-process the data ready for prediction:
 ep.preprocess()
+##we want to predict edges from drugs to drug targets
 ep.to_predict = 'DRUG_TARGETS'
+##specify the order
 ep.network_order = ['TREAT', 'DRUG_TARGETS']
+##run prediction
 ep.require_all_predictors = False
+##we will predict 'DRUG_TARGETS' edges from all drug nodes to drug target related to ADHD ('P34972')
 result = ep.predict(target= 'P34972', calculate_auc=True)
 result
 
 ##result of historical validation
+##Import the library:
 import EdgePrediction
+##Create an instance:
 ep = EdgePrediction.EdgePrediction()
+##Load data from data_after_process
 ep.CSV_to_graph(fname = 'data/data_16.csv', header = True, srcNameCol = 0, srcTypeCol = 1, tgtNameCol = 4,tgtTypeCol = 3, edgeTypeCol = 2)
-
+##pre-process the data ready for prediction:
 ep.preprocess()
+##we want to predict edges from drugs to drug targets
 ep.to_predict = 'DRUG_TARGETS'
 ep.network_order = ['TREAT', 'DRUG_TARGETS']
 ep.require_all_predictors = False
+##we will predict 'DRUG_TARGETS' edges from all drug nodes to drug target related to ADHD ('P34972')
 result = ep.predict(target= 'P34972', calculate_auc=True)
 result
 
